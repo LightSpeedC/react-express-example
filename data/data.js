@@ -36,6 +36,11 @@
 			this.data = this.data.filter(x => x.id !== data.id);
 			return data;
 		},
+		findById(id) {
+			let data;
+			this.data.some(x => x.id === id ? (data = x, true): false);
+			return data;
+		},
 		load() {
 			const ctor = this;
 			ctor.data =

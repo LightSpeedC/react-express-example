@@ -29,6 +29,7 @@ const context = {};
 
 app.use('/',      require('./routes/index')(context));
 app.use('/users', require('./routes/users')(context));
+app.use('/depts', require('./routes/depts')(context));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
