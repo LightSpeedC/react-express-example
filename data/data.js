@@ -15,6 +15,7 @@
 		},
 		add() { return this.constructor.add(this); },
 		remove() { return this.constructor.remove(this); },
+		save() { return this.constructor.save(); }
 	},
 	{
 		file: 'data.json',
