@@ -1,0 +1,16 @@
+[
+	{
+		"id": 20000,
+		"code": "admins",
+		"name": "Admins",
+		"desc": "管理者",
+		"roles": []
+	},
+	{
+		"id": 20001,
+		"code": "users",
+		"name": "Users",
+		"desc": "管理者",
+		"roles": []
+	}
+]
