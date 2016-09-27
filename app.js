@@ -27,11 +27,17 @@ app.use(cookieParser());
 
 const context = {};
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+//--デバッグheaders
+//app.use(function (req, res, next) {
+//	console.log(req.headers);
+//	next();
+//});
+
 app.use('/',      require('./routes/index')(context));
 app.use('/users', require('./routes/users')(context));
 app.use('/depts', require('./routes/depts')(context));
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
 app.use(function onError404(req, res, next) {
