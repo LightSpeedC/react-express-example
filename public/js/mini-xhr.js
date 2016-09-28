@@ -35,7 +35,7 @@ this.MiniXHR = function () {
 			}
 			xhr.open(method, baseUrl + url);
 			if (typeof data !== 'undefined') {
-				xhr.setRequestHeader('Content-Type' , 'application/json');
+				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.send(JSON.stringify(data));
 			}
 			else xhr.send();
