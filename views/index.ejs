@@ -1,11 +1,51 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title><%= title %></title>
-		<link rel='stylesheet' href='/css/style.css' />
-	</head>
-	<body>
-		<h1><%= title %></h1>
-		<p>Welcome to <%= title %></p>
-	</body>
+<head>
+<title><%= title %></title>
+<link rel='stylesheet' href='/css/style.css' />
+</head>
+<body>
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+<% include react %>
+
+<div id="example1"></div>
+<div id="example2"></div>
+<div id="example3"></div>
+
+<script type="text/babel">
+const example1 = document.getElementById('example1');
+const example2 = document.getElementById('example2');
+const example3 = document.getElementById('example3');
+
+const HelloMessage = React.createClass({
+	render() {
+		return <h1>Hello, {this.props.name}!</h1>;
+	}
+});
+
+const Timer = React.createClass({
+	getInitialState() {
+		return {secondsElapsed: 0};
+	},
+	tick() {
+		this.setState({secondsElapsed: this.state.secondsElapsed + 1});
+	},
+	componentDidMount() {
+		this.interval = setInterval(this.tick, 1000);
+	},
+	componentWillUnmount() {
+		clearInterval(this.interval);
+	},
+	render() {
+		return <div>Seconds Elapsed: {this.state.secondsElapsed}</div>;
+	}
+});
+
+ReactDOM.render(<HelloMessage name="React" />, example1);
+ReactDOM.render(<Timer />, example2);
+
+</script>
+
+</body>
 </html>
