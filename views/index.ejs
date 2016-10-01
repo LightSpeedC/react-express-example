@@ -8,61 +8,94 @@
 <h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
 <% include react %>
+<% include socket %>
+<% include ajax %>
 
-<div id="example1"></div>
-<div id="example2"></div>
-<div id="example3"></div>
+<div id="hello-message"></div>
+<div id="app-main"></div>
 
 <script type="text/babel">
-const example1 = document.getElementById('example1');
-const example2 = document.getElementById('example2');
-const example3 = document.getElementById('example3');
-const ctx = {};
 
+// <HelloMessage name={name}/>
 const HelloMessage = React.createClass({
 	getInitialState() {
-		if (this.props.ctx) this.props.ctx.hhh = this;
-		return {name: this.props.name};
+		//this.ctx = this.props.ctx || {};
+		//this.ctx.hello = this;
+		return {};
 	},
 	render() {
-		return <h1>Hello, {this.state.name}!</h1>;
+		return <h1>Hello, {this.state.name || this.props.name}!</h1>;
 	}
 });
 
+// <Timer interval={1000} />
 const Timer = React.createClass({
 	getInitialState() {
-		return {secondsElapsed: 0};
+		this.interval = this.props.interval || 1000;
+		return {counter: 0};
 	},
 	tick() {
-		this.setState({secondsElapsed: this.state.secondsElapsed + 1});
-		this.props.ctx.hhh.setState({name: 'React ' + this.state.secondsElapsed});
+		this.setState({counter: this.state.counter + 1});
+		helloMessage.setState({name: 'React ' + this.state.counter});
 	},
 	componentDidMount() {
-		this.interval = setInterval(this.tick, 1000);
+		this.timer = setInterval(this.tick, this.interval);
 	},
 	componentWillUnmount() {
-		clearInterval(this.interval);
+		clearInterval(this.timer);
 	},
 	render() {
-		return <div>Seconds Elapsed: {this.state.secondsElapsed}</div>;
+		return <div>Count: {this.state.counter}</div>;
 	}
 });
 
-ReactDOM.render(<HelloMessage name="React" ctx={ctx} />, example1);
-ReactDOM.render(<Timer ctx={ctx}/>, example2);
-
-console.log(Timer);
-console.log(HelloMessage);
-
-</script>
-
-<script src="/socket.io/socket.io.js"></script>
-<script>
-const socket = io.connect(location.href);
-socket.on('news', function (data) {
-	console.log(data);
-	socket.emit('my other event', {my: 'data'});
+// <SocketNews/>
+const SocketNews = React.createClass({
+	getInitialState() {
+		return {list: []};
+	},
+	news (data) {
+		this.state.list.push(data);
+		this.setState({list: this.state.list});
+		this.socket.emit('my other event', {my: 'data'});
+	},
+	componentDidMount() {
+		console.log(location.href);
+		this.socket = io.connect(location.href)
+			.on('news', this.news);
+	},
+	componentWillUnmount() {
+		this.socket.close();
+		this.soclet = null;
+	},
+	render() {
+		return <div>
+				{this.state.list
+					.map(JSON.stringify)
+					.map(x => <p>{x}</p>)}
+			</div>;
+	}
 });
+
+// <AppMain/>
+const AppMain = React.createClass({
+	render() {
+		return <div>{this.props.children}</div>;
+	}
+});
+
+var helloMessage = ReactDOM.render(<HelloMessage name="React" />,
+	document.getElementById('hello-message'));
+
+var appMain = ReactDOM.render(
+	<AppMain>
+		<Timer interval={1000} />
+		<SocketNews/>
+	</AppMain>,
+	document.getElementById('app-main'));
+
+console.log(appMain);
+
 </script>
 
 </body>
