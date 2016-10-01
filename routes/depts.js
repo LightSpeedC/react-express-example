@@ -9,7 +9,8 @@
 
 		/* GET depts listing. */
 		router.get('/', function routeDeptsGet(req, res, next) {
-			if (req.headers['user-agent'].includes('Mozilla'))
+			if (!req.headers['x-get-data'] &&
+				req.headers['user-agent'].includes('Mozilla'))
 				return res.send(renderData(DeptData.data));
 			res.json(DeptData.data);
 		});
@@ -21,7 +22,8 @@
 			const data = DeptData.findById(Number(req.params.id)) ||
 				{error: 'not found', id: req.params.id};
 
-			if (req.headers['user-agent'].includes('Mozilla'))
+			if (!req.headers['x-get-data'] &&
+				req.headers['user-agent'].includes('Mozilla'))
 				return res.send(renderData([data]));
 			res.json(data);
 		});

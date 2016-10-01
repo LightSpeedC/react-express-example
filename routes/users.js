@@ -9,7 +9,8 @@
 
 		/* GET users listing. */
 		router.get('/', function routeUsersGet(req, res, next) {
-			if (req.headers['user-agent'].includes('Mozilla'))
+			if (!req.headers['x-get-data'] &&
+				req.headers['user-agent'].includes('Mozilla'))
 				return res.send(renderData(UserData.data));
 			res.json(UserData.data);
 		});
@@ -21,7 +22,8 @@
 			const data = UserData.findById(Number(req.params.id)) ||
 				{error: 'not found', id: req.params.id};
 
-			if (req.headers['user-agent'].includes('Mozilla'))
+			if (!req.headers['x-get-data'] &&
+				req.headers['user-agent'].includes('Mozilla'))
 				return res.send(renderData([data]));
 			res.json(data);
 		});

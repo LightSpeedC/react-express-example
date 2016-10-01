@@ -28,3 +28,13 @@ Rect.js
 ----
 
 + propTypes
+
+
+### [React] コンポーネントをシンプルに書くためのStateless Functional Componentsについて
+
++ http://mae.chab.in/archives/2854
++ https://facebook.github.io/react/docs/reusable-components.html#stateless-functions
+
+### Create React App
+
++ https://github.com/facebookincubator/create-react-app

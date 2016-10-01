@@ -13,18 +13,24 @@
 
 <div id="hello-message"></div>
 <div id="app-main"></div>
+<div id="socket-news"></div>
+<div id="users-div"></div>
+<div id="user-div"></div>
+
+<script>
+console.log(location.href);
+const socket = io.connect(location.href);
+</script>
 
 <script type="text/babel">
 
 // <HelloMessage name={name}/>
 const HelloMessage = React.createClass({
 	getInitialState() {
-		//this.ctx = this.props.ctx || {};
-		//this.ctx.hello = this;
-		return {};
+		return {name: this.props.name}; // bad!?
 	},
 	render() {
-		return <h1>Hello, {this.state.name || this.props.name}!</h1>;
+		return <h2>Hello, {this.state.name}!</h2>;
 	}
 });
 
@@ -36,7 +42,11 @@ const Timer = React.createClass({
 	},
 	tick() {
 		this.setState({counter: this.state.counter + 1});
-		helloMessage.setState({name: 'React ' + this.state.counter});
+		//console.log('update:', this.props.update);
+		if (this.props.update)
+			this.props.update.setState({name: 'React ' + this.state.counter});
+		else
+			console.log('update null');
 	},
 	componentDidMount() {
 		this.timer = setInterval(this.tick, this.interval);
@@ -49,7 +59,7 @@ const Timer = React.createClass({
 	}
 });
 
-// <SocketNews/>
+// <SocketNews socket={socket} />
 const SocketNews = React.createClass({
 	getInitialState() {
 		return {list: []};
@@ -57,16 +67,13 @@ const SocketNews = React.createClass({
 	news (data) {
 		this.state.list.push(data);
 		this.setState({list: this.state.list});
-		this.socket.emit('my other event', {my: 'data'});
+		this.props.socket.emit('my other event', {my: 'data'});
 	},
 	componentDidMount() {
-		console.log(location.href);
-		this.socket = io.connect(location.href)
-			.on('news', this.news);
+		this.props.socket.on('news', this.news);
 	},
 	componentWillUnmount() {
-		this.socket.close();
-		this.soclet = null;
+		//this.props.socket.close();
 	},
 	render() {
 		return <div>
@@ -77,24 +84,69 @@ const SocketNews = React.createClass({
 	}
 });
 
+// <User id={} code={} name={} />
+//const User = props => <div>{props.id}:{props.code}:{props.name}</div>;
+const User = props => <tr><td>{props.id}</td><td>{props.code}</td><td>{props.name}</td></tr>;
+User.defaultProps = {id:0, code:'', name:''};
+//User.propTypes = {};
+
+// <Users />
+const Users = React.createClass({
+	getInitialState() {
+		return {
+			users: [{id: 1, name: 'foo'}, {id: 2, name: 'bar'}]
+		};
+	},
+	componentDidMount() {
+		ajax.get(location.href + 'users')
+		.then(res => this.setState({users: res.body}));
+	},
+	render() {
+		const users = this.state.users.map(user =>
+			<User id={user.id} name={user.name} key={user.id}/>);
+		return <div>
+				<h3>ユーザー一覧</h3>
+				<table border="1">
+					<tr><th>id</th><th>code</th><th>name</th></tr>
+					{users}
+				</table>
+			</div>;
+	}
+});
+
 // <AppMain/>
 const AppMain = React.createClass({
 	render() {
+		const list = [].slice.call(this.props.children);
+		//list.unshift(<Timer interval={1000} update={this.props.update} />);
+		//return <div>{list}</div>;
 		return <div>{this.props.children}</div>;
 	}
 });
 
-var helloMessage = ReactDOM.render(<HelloMessage name="React" />,
+console.log('render <HelloMessage>');
+const helloMessage = ReactDOM.render(<HelloMessage name="React" />,
 	document.getElementById('hello-message'));
 
-var appMain = ReactDOM.render(
-	<AppMain>
-		<Timer interval={1000} />
-		<SocketNews/>
-	</AppMain>,
-	document.getElementById('app-main'));
+//const appMain = ReactDOM.render(
+//	<AppMain update={helloMessage}>
+//		<SocketNews socket={socket} />
+//		<Users/>
+//	</AppMain>,
+//	document.getElementById('app-main'));
+//console.log('appMain:', appMain);
 
-console.log(appMain);
+console.log('render <SocketNews>');
+ReactDOM.render(<SocketNews socket={socket}/>,
+	document.getElementById('socket-news'));
+
+console.log('ajax /users');
+ajax.get(location.href + 'users')
+.then(res => console.log('ajax /users res:', res));
+
+console.log('render <Users>');
+ReactDOM.render(<Users />,
+	document.getElementById('users-div'));
 
 </script>
 
