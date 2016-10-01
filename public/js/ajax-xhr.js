@@ -16,5 +16,5 @@ function ajax(method, url, data) {
 	});
 }
 
-ajax.get = function (url) { return ajax('GET', url);
-ajax.post = function (url, data) { return ajax('POST', url, data);
+ajax.get = function (url) { return ajax('GET', url); };
+ajax.post = function (url, data) { return ajax('POST', url, data); };
