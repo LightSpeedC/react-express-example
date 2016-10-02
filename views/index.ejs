@@ -98,7 +98,7 @@ const Users = React.createClass({
 		};
 	},
 	componentDidMount() {
-		ajax.get(location.href + 'users')
+		request.get(location.href + 'users')
 		.then(res => this.setState({users: res.body}));
 	},
 	render() {
@@ -140,9 +140,9 @@ console.log('render <SocketNews>');
 ReactDOM.render(<SocketNews socket={socket}/>,
 	document.getElementById('socket-news'));
 
-console.log('ajax /users');
-ajax.get(location.href + 'users')
-.then(res => console.log('ajax /users res:', res));
+console.log('request /users');
+request.get(location.href + 'users')
+.then(res => console.log('request /users res:', res));
 
 console.log('render <Users>');
 ReactDOM.render(<Users />,
