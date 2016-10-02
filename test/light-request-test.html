@@ -1,0 +1,13 @@
+<script src="../public/js/light-request.js">
+</script>
+<script>
+void function () {
+	'use strict';
+
+	//request.get('https://api.github.com/users/LightSpeedC',
+	request.get('https://www.google.com',
+		undefined, {headers: {'user-agent': 'test client'}})
+	.then(res => console.log(res));
+
+} ();
+</script>

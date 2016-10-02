@@ -28,15 +28,15 @@
 		module.exports = request;
 
 	//request.setDefaultHeaders(headers)
-	request.get  = function (uri)       { return request('GET',    uri); };
-	request.post = function (uri, data) { return request('POST',   uri, data); };
-	request.put  = function (uri, data) { return request('PUT',    uri, data); };
-	request.del  = function (uri, data) { return request('DELETE', uri, data); };
+	request.get  = function (uri, data, opts) { return request('GET',    uri, data, opts); };
+	request.post = function (uri, data, opts) { return request('POST',   uri, data, opts); };
+	request.put  = function (uri, data, opts) { return request('PUT',    uri, data, opts); };
+	request.del  = function (uri, data, opts) { return request('DELETE', uri, data, opts); };
 	request['delete'] = request.del;
 
 	return request;
 
-	function requestXHR(method, uri, data) {
+	function requestXHR(method, uri, data, options) {
 		var start = new Date;
 		return new Promise(function (resolve, reject) {
 			var xhr = new XMLHttpRequest;
@@ -63,7 +63,10 @@
 			}
 			xhr.onerror = reject;
 			xhr.open(method, uri, true);
-			xhr.setRequestHeader('X-Get-Data', 'true');
+			if (options && options.headers)
+				for (var i in options.headers)
+					try { xhr.setRequestHeader(i, options.headers[i]); }
+					catch (e) { console.log(e); }
 			if (typeof data !== 'undefined') {
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.send(JSON.stringify(data));
@@ -72,11 +75,14 @@
 		}); // new Promise
 	} // requestXHR
 
-	function requestHTTP(method, uri, data) {
+	function requestHTTP(method, uri, data, options) {
 		return new Promise(function (resolve, reject) {
 			var opts = deps.parseURL(uri);
 			opts.method = method;
-			opts.headers = {'X-Get-Data': 'true'};
+			opts.headers = {};
+			if (options && options.headers)
+				for (var i in options.headers)
+					opts.headers[i] = options.headers[i];
 
 			if (typeof data !== 'undefined') {
 				opts.headers['Content-Type'] = 'application/json';
@@ -103,3 +109,4 @@
 // https://ja.wikipedia.org/wiki/XMLHttpRequest
 // https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest
 // https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest/Synchronous_and_Asynchronous_Requests
+// http://www.html5rocks.com/ja/tutorials/es6/promises/
