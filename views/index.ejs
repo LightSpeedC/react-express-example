@@ -16,138 +16,55 @@
 <div id="socket-news"></div>
 <div id="users-div"></div>
 <div id="user-div"></div>
+<div id="timer"></div>
 
 <script>
 console.log(location.href);
 const socket = io.connect(location.href);
 </script>
 
+<script type="text/babel" src="/jsx/hello-message.js"></script>
+
 <script type="text/babel">
-
-// <HelloMessage name={name}/>
-const HelloMessage = React.createClass({
-	getInitialState() {
-		return {name: this.props.name}; // bad!?
-	},
-	render() {
-		return <h2>Hello, {this.state.name}!</h2>;
-	}
-});
-
-// <Timer interval={1000} />
-const Timer = React.createClass({
-	getInitialState() {
-		this.interval = this.props.interval || 1000;
-		return {counter: 0};
-	},
-	tick() {
-		this.setState({counter: this.state.counter + 1});
-		//console.log('update:', this.props.update);
-		if (this.props.update)
-			this.props.update.setState({name: 'React ' + this.state.counter});
-		else
-			console.log('update null');
-	},
-	componentDidMount() {
-		this.timer = setInterval(this.tick, this.interval);
-	},
-	componentWillUnmount() {
-		clearInterval(this.timer);
-	},
-	render() {
-		return <div>Count: {this.state.counter}</div>;
-	}
-});
-
-// <SocketNews socket={socket} />
-const SocketNews = React.createClass({
-	getInitialState() {
-		return {list: []};
-	},
-	news (data) {
-		this.state.list.push(data);
-		this.setState({list: this.state.list});
-		this.props.socket.emit('my other event', {my: 'data'});
-	},
-	componentDidMount() {
-		this.props.socket.on('news', this.news);
-	},
-	componentWillUnmount() {
-		//this.props.socket.close();
-	},
-	render() {
-		return <div>
-				{this.state.list
-					.map(JSON.stringify)
-					.map(x => <p>{x}</p>)}
-			</div>;
-	}
-});
-
-// <User id={} code={} name={} />
-//const User = props => <div>{props.id}:{props.code}:{props.name}</div>;
-const User = props => <tr><td>{props.id}</td><td>{props.code}</td><td>{props.name}</td></tr>;
-User.defaultProps = {id:0, code:'', name:''};
-//User.propTypes = {};
-
-// <Users />
-const Users = React.createClass({
-	getInitialState() {
-		return {
-			users: [{id: 1, name: 'foo'}, {id: 2, name: 'bar'}]
-		};
-	},
-	componentDidMount() {
-		request.get(location.href + 'users')
-		.then(res => this.setState({users: res.body}));
-	},
-	render() {
-		const users = this.state.users.map(user =>
-			<User id={user.id} name={user.name} key={user.id}/>);
-		return <div>
-				<h3>ユーザー一覧</h3>
-				<table border="1">
-					<tr><th>id</th><th>code</th><th>name</th></tr>
-					{users}
-				</table>
-			</div>;
-	}
-});
-
-// <AppMain/>
-const AppMain = React.createClass({
-	render() {
-		const list = [].slice.call(this.props.children);
-		//list.unshift(<Timer interval={1000} update={this.props.update} />);
-		//return <div>{list}</div>;
-		return <div>{this.props.children}</div>;
-	}
-});
-
 console.log('render <HelloMessage>');
 const helloMessage = ReactDOM.render(<HelloMessage name="React" />,
 	document.getElementById('hello-message'));
+window.helloMessage = helloMessage;
+</script>
 
-//const appMain = ReactDOM.render(
-//	<AppMain update={helloMessage}>
-//		<SocketNews socket={socket} />
-//		<Users/>
-//	</AppMain>,
-//	document.getElementById('app-main'));
-//console.log('appMain:', appMain);
+<hr/>
 
+<script type="text/babel" src="/jsx/socket-news.js"></script>
+<script type="text/babel">
 console.log('render <SocketNews>');
 ReactDOM.render(<SocketNews socket={socket}/>,
 	document.getElementById('socket-news'));
+</script>
 
-console.log('request /users');
-request.get(location.href + 'users')
-.then(res => console.log('request /users res:', res));
+<script type="text/babel" src="/jsx/user.js"></script>
+<script type="text/babel" src="/jsx/users.js"></script>
 
+<script type="text/babel">
+//console.log('request /users');
+//request.get(location.href + 'users', undefined, {headers: {'x-get-data': true}})
+//.then(res => console.log('request /users res:', res));
+</script>
+
+<hr/>
+
+<script type="text/babel">
 console.log('render <Users>');
 ReactDOM.render(<Users />,
 	document.getElementById('users-div'));
+</script>
 
+<hr/>
+
+<script type="text/babel" src="/jsx/timer.js"></script>
+<script type="text/babel">
+console.log('render <Timer>');
+ReactDOM.render(<Timer update={helloMessage} />,
+	document.getElementById('timer'));
 </script>
 
 </body>
