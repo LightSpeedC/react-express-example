@@ -8,4 +8,6 @@ const HelloMessage = React.createClass({
 	}
 });
 
+if (typeof module === 'object')
+	module.exports = HelloMessage;
 window.HelloMessage = HelloMessage;

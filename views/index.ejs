@@ -2,7 +2,8 @@
 <html>
 <head>
 <title><%= title %></title>
-<link rel='stylesheet' href='/css/style.css' />
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/elemental.css" type="text/css" />
 </head>
 <body>
 <h1><%= title %></h1>
@@ -11,61 +12,8 @@
 <% include socket %>
 <% include light-request %>
 
-<div id="hello-message"></div>
-<div id="app-main"></div>
-<div id="socket-news"></div>
-<div id="users-div"></div>
-<div id="user-div"></div>
-<div id="timer"></div>
+<div id="app"></div>
 
-<script>
-console.log(location.href);
-const socket = io.connect(location.href);
-</script>
-
-<script type="text/babel" src="/jsx/hello-message.js"></script>
-
-<script type="text/babel">
-console.log('render <HelloMessage>');
-const helloMessage = ReactDOM.render(<HelloMessage name="React" />,
-	document.getElementById('hello-message'));
-window.helloMessage = helloMessage;
-</script>
-
-<hr/>
-
-<script type="text/babel" src="/jsx/socket-news.js"></script>
-<script type="text/babel">
-console.log('render <SocketNews>');
-ReactDOM.render(<SocketNews socket={socket}/>,
-	document.getElementById('socket-news'));
-</script>
-
-<script type="text/babel" src="/jsx/user.js"></script>
-<script type="text/babel" src="/jsx/users.js"></script>
-
-<script type="text/babel">
-//console.log('request /users');
-//request.get(location.href + 'users', undefined, {headers: {'x-get-data': true}})
-//.then(res => console.log('request /users res:', res));
-</script>
-
-<hr/>
-
-<script type="text/babel">
-console.log('render <Users>');
-ReactDOM.render(<Users />,
-	document.getElementById('users-div'));
-</script>
-
-<hr/>
-
-<script type="text/babel" src="/jsx/timer.js"></script>
-<script type="text/babel">
-console.log('render <Timer>');
-ReactDOM.render(<Timer update={helloMessage} />,
-	document.getElementById('timer'));
-</script>
-
+<script src="/js/min/bundle.js"></script>
 </body>
 </html>

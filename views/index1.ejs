@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title><%= title %></title>
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/elemental.css" type="text/css" />
+</head>
+<body>
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+<% include react %>
+<% include socket %>
+<% include light-request %>
+
+<div id="app"></div>
+
+<script type="text/babel">
+import React from 'react';
+import ReactDOM from 'react-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MyAwesomeReactComponent from './MyAwesomeReactComponent';
+
+const App = () => (
+  <MuiThemeProvider>
+    <MyAwesomeReactComponent />
+  </MuiThemeProvider>
+);
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('app')
+);
+</script>
+
+<hr/>
+<div id="hello-message"></div>
+<hr/>
+<div id="app-main"></div>
+<hr/>
+<div id="socket-news"></div>
+<hr/>
+<div id="users-div"></div>
+<hr/>
+<div id="timer"></div>
+<hr/>
+
+<script>
+console.log(location.href);
+const socket = io.connect(location.href);
+</script>
+
+<script type="text/babel" src="/jsx/hello-message.js"></script>
+
+<script type="text/babel">
+console.log('render <HelloMessage>');
+const helloMessage = ReactDOM.render(<HelloMessage name="React" />,
+	document.getElementById('hello-message'));
+window.helloMessage = helloMessage;
+</script>
+
+<script type="text/babel" src="/jsx/socket-news.js"></script>
+<script type="text/babel">
+console.log('render <SocketNews>');
+ReactDOM.render(<SocketNews socket={socket}/>,
+	document.getElementById('socket-news'));
+</script>
+
+<script type="text/babel" src="/jsx/user.js"></script>
+<script type="text/babel" src="/jsx/users.js"></script>
+
+<script type="text/babel">
+console.log('render <Users>');
+ReactDOM.render(<Users />,
+	document.getElementById('users-div'));
+</script>
+
+<script type="text/babel" src="/jsx/timer.js"></script>
+<script type="text/babel">
+//console.log('render <Timer>');
+//ReactDOM.render(<Timer update={helloMessage} />,
+//	document.getElementById('timer'));
+</script>
+
+<script type="text/babel" src="/jsx/app-main.js"></script>
+<script type="text/babel">
+console.log('render <AppMain>');
+ReactDOM.render(<AppMain>
+		<Timer update={helloMessage} />
+	</AppMain>,
+	document.getElementById('app-main'));
+</script>
+
+</body>
+</html>
