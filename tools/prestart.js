@@ -2,6 +2,7 @@
 	const pkg = require('../package')
 	try {
 		Object.keys(pkg.dependencies).map(require);
+		Object.keys(pkg.devDependencies).map(require);
 	} catch (e) {
 		//require('child_process').execSync('npm install');
 
