@@ -22,11 +22,19 @@ class Users extends React.Component {
 		//console.log('this.state.users.constructor.name:', this.state.users.constructor.name);
 		const users = this.state.users.map(user =>
 			<User id={user.id} name={user.name} key={user.id}/>);
-		users.unshift(<tr key="header"><th>id</th><th>code</th><th>name</th></tr>);
 		return <div>
 				<h3>ユーザー一覧</h3>
 				<table>
-					{users}
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>code</th>
+							<th>name</th>
+						</tr>
+					</thead>
+					<tbody>
+						{users}
+					</tbody>
 				</table>
 			</div>;
 	}
