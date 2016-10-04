@@ -12,8 +12,12 @@
 <% include socket %>
 <% include light-request %>
 
+<script>
+var socket = io.connect(location.href);
+</script>
+
 <div id="app"></div>
 
-<script src="/js/min/bundle.js"></script>
+<script src="/js/bundle.js"></script>
 </body>
 </html>
