@@ -35,6 +35,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 //	next();
 //});
 
+app.use(function (req, res, next) {
+	console.log('\x1b[32m' + req.method + ' ' + req.url + '\x1b[m');
+	next();
+});
+
 app.use('/',      require('./routes/index')(context));
 app.use('/users', require('./routes/users')(context));
 app.use('/depts', require('./routes/depts')(context));
