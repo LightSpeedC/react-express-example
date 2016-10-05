@@ -7,7 +7,7 @@ class Users extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			users: [{id: 1, name: 'foo'}, {id: 2, name: 'bar'}]
+			users: [{id: 1, name: 'Foo', code: 'foo'}, {id: 2, name: 'Bar', code: 'bar'}]
 		};
 	}
 	componentDidMount() {
@@ -21,7 +21,7 @@ class Users extends React.Component {
 		//console.log('typeof this.state.users:', typeof this.state.users);
 		//console.log('this.state.users.constructor.name:', this.state.users.constructor.name);
 		const users = this.state.users.map(user =>
-			<User id={user.id} name={user.name} key={user.id}/>);
+			<User {...user} key={user.id}/>);
 		return <div>
 				<h3>ユーザー一覧</h3>
 				<table>
