@@ -35,6 +35,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 //	next();
 //});
 
+// cache-control
+app.use(function (req, res, next) {
+	res.setHeader('Cache-Control', 'max-age=0');
+	res.setHeader('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT');
+	next();
+});
+
+// method start log
 app.use(function (req, res, next) {
 	console.log('\x1b[32m' + req.method + ' ' + req.url + '\x1b[m');
 	next();
