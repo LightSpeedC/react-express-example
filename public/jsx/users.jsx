@@ -12,7 +12,7 @@ class Users extends React.Component {
 	}
 	componentDidMount() {
 		setTimeout(()=>{
-			request.get(location.href + 'users', undefined, {headers: {'x-get-data': true}})
+			request.get({headers: {'x-get-data': true}}, location.href + 'users')
 			.then(res => this.setState({users: res.body}));
 		}, 3000);
 	}
