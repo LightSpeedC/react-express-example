@@ -10,6 +10,7 @@ import HelloMessage from './hello-message.jsx';
 import SocketNews from './socket-news.jsx';
 import User from './user.jsx';
 import Users from './users.jsx';
+import Timer from './timer.jsx';
 
 // コンポーネント
 class Test extends React.Component {
@@ -18,6 +19,7 @@ class Test extends React.Component {
 			<h1 key="h1">React.jsのテスト</h1>
 			<HelloMessage key="hm" name="React!" />
 			<SocketNews key="sn" socket={socket} />
+			<Timer />
 			<Users />
 			{/*<table>
 				<User id="111" name="username111" code="usercode111" />
