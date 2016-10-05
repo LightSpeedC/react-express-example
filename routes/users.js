@@ -7,7 +7,7 @@ module.exports = function (context) {
 
 	/* GET users listing. */
 	router.get('/', function routeUsersGet(req, res, next) {
-		console.log(Object.keys(req.headers).map(x => '  ' + x + ': ' + req.headers[x]).join('\n'));
+		//console.log(Object.keys(req.headers).map(x => '  ' + x + ': ' + req.headers[x]).join('\n'));
 
 		if (!req.headers['x-get-data'] &&
 			req.headers['user-agent'].includes('Mozilla'))
