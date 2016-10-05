@@ -27,6 +27,15 @@ app.use(cookieParser());
 
 const context = {};
 
+// cache-control
+app.use(function (req, res, next) {
+	if (req.url.endsWith('.min.js')) {
+		console.log('min.js');
+		res.setHeader('Cache-Control', 'max-age=120');
+	}
+	next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 //--デバッグheaders
