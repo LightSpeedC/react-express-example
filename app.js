@@ -30,7 +30,7 @@ const context = {};
 // cache-control
 app.use(function (req, res, next) {
 	if (req.url.endsWith('.min.js')) {
-		console.log('min.js');
+		console.log('min.js:', req.url);
 		res.setHeader('Cache-Control', 'max-age=120');
 	}
 	next();
@@ -120,7 +120,7 @@ function onError(error) {
 		throw error;
 	}
 
-	const bind = 'Port ' + port;
+	const bind = 'Port ' + PORT;
 
 	// handle specific listen errors with friendly messages
 	switch (error.code) {
