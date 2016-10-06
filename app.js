@@ -31,6 +31,10 @@ const context = {};
 app.use(function (req, res, next) {
 	if (req.url.endsWith('.min.js')) {
 		console.log('min.js:', req.url);
+		res.setHeader('Cache-Control', 'max-age=300');
+	}
+	else if (req.url.endsWith('.js') ||
+			req.url.endsWith('.css')) {
 		res.setHeader('Cache-Control', 'max-age=120');
 	}
 	next();
