@@ -31,11 +31,11 @@ const context = {};
 app.use(function (req, res, next) {
 	if (req.url.endsWith('.min.js')) {
 		console.log('min.js:', req.url);
-		res.setHeader('Cache-Control', 'max-age=300');
+		res.setHeader('Cache-Control', 'max-age=' + (12 * 60 * 60));
 	}
 	else if (req.url.endsWith('.js') ||
 			req.url.endsWith('.css')) {
-		res.setHeader('Cache-Control', 'max-age=120');
+		res.setHeader('Cache-Control', 'max-age=' + (5 * 60));
 	}
 	next();
 });
