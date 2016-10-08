@@ -1,9 +1,9 @@
 // <Users />
-import React from 'react';
+
+import {Component} from 'react';
 import User from './user.jsx';
 
-//const Users = React.createClass({
-class Users extends React.Component {
+class Users extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -39,8 +39,5 @@ class Users extends React.Component {
 			</div>;
 	}
 }
-//});
 
 export default Users;
-//console.log('typeof module:', typeof module);
-//window.Users = Users;

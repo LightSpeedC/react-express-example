@@ -1,7 +1,8 @@
 // <Timer interval={1000} />
-import React from 'react';
 
-class Timer extends React.Component {
+import {Component} from 'react';
+
+class Timer extends Component {
 	constructor(props) {
 		super(props);
 		this.interval = props.interval || 1000;

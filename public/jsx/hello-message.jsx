@@ -1,7 +1,8 @@
 // <HelloMessage name={name}/>
-import React from 'react';
 
-class HelloMessage extends React.Component {
+import {Component} from 'react';
+
+class HelloMessage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {name: this.props.name}; // bad!?
@@ -12,5 +13,3 @@ class HelloMessage extends React.Component {
 }
 
 export default HelloMessage;
-//if (typeof module === 'object') module.exports = HelloMessage;
-//window.HelloMessage = HelloMessage;

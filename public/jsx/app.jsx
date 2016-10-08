@@ -1,8 +1,8 @@
-// https://www.willstyle.co.jp/blog/268/
-//#common/js/jsx/app.jsx
+// <App />
+
 // Reactをインポート
-import React from 'react';
-import ReactDOM from 'react-dom';
+import {Component} from 'react';
+import {render} from 'react-dom';
 
 import {Button, Alert, Spinner} from 'elemental';
 
@@ -13,7 +13,7 @@ import Users from './users.jsx';
 import Timer from './timer.jsx';
 
 // コンポーネント
-class Test extends React.Component {
+class App extends Component {
 	render() {
 		return <div>
 			<h1 key="h1">React.jsのテスト</h1>
@@ -24,11 +24,13 @@ class Test extends React.Component {
 			{/*<table>
 				<User id="111" name="username111" code="usercode111" />
 			</table>*/}
+			<div>{this.props.children}</div>
 			<Button>xx</Button>
 		</div>;
 	}
 }
 
 // レンダリング
-ReactDOM.render(<Test />,
-	document.getElementById('app'));
+render(<App />, document.getElementById('app'));
+
+// 参考URL https://www.willstyle.co.jp/blog/268/

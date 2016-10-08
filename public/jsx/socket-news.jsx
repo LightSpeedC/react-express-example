@@ -1,7 +1,8 @@
 // <SocketNews socket={socket} />
-import React from 'react';
 
-class SocketNews extends React.Component {
+import {Component} from 'react';
+
+class SocketNews extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {list: [{started: new Date().toString()}]};
@@ -27,5 +28,3 @@ class SocketNews extends React.Component {
 }
 
 export default SocketNews;
-//if (typeof module === 'object') module.exports = SocketNews;
-//window.SocketNews = SocketNews;
