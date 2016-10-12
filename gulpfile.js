@@ -17,7 +17,7 @@ gulp.task('browserify', function () {
 		.on('error', function (err) { console.log('Error : ' + err.message); })
 		.pipe(source('bundle.js'))
 		.pipe(gulp.dest('./public/js/'))
-		.on('end', function (){
+		.on('end', function () {
 			gulp.src(['./public/js/bundle.js'])
 				.pipe(plumber())
 				.pipe(uglify({mangle: false}))
@@ -26,7 +26,7 @@ gulp.task('browserify', function () {
 });
 
 // watch 
-gulp.task('watch', function (){
+gulp.task('watch', function () {
 	gulp.watch('./public/jsx/*.jsx', ['browserify']);
 });
 
