@@ -1,6 +1,7 @@
 // <SocketNews socket={socket} />
 
-import {Component} from 'react';
+//import {Component} from 'react';
+const Component = require('react').Component;
 
 class SocketNews extends Component {
 	constructor(props) {
@@ -27,4 +28,5 @@ class SocketNews extends Component {
 	}
 }
 
-export default SocketNews;
+//export default SocketNews;
+module.exports = SocketNews;

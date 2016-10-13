@@ -1,17 +1,32 @@
 // <App />
 
 // Reactをインポート
-import {Component} from 'react';
-import {render} from 'react-dom';
-import {Router, Route} from 'react-router';
+//import {Component} from 'react';
+const Component = require('react').Component;
+//import {render} from 'react-dom';
+const render = require('react-dom').render;
+//import {Router, Route} from 'react-router';
+const Router = require('react-router').Router;
+const Route = require('react-router').Route;
+const browserHistory = require('react-router').browserHistory;
 
-import {Button, Alert, Spinner} from 'elemental';
+/*
+//import {Button, Alert, Spinner} from 'elemental';
+const Alert = require('elemental').Alert;
+const Button = require('elemental').Button;
+const Spinner = require('elemental').Spinner;
+*/
 
-import HelloMessage from './hello-message.jsx';
-import SocketNews from './socket-news.jsx';
-import User from './user.jsx';
-import Users from './users.jsx';
-import Timer from './timer.jsx';
+//import HelloMessage from './hello-message.jsx';
+const HelloMessage = require('./hello-message.jsx');
+//import SocketNews from './socket-news.jsx';
+const SocketNews = require('./socket-news.jsx');
+//import User from './user.jsx';
+const User = require('./user.jsx');
+//import Users from './users.jsx';
+const Users = require('./users.jsx');
+//import Timer from './timer.jsx';
+const Timer = require('./timer.jsx');
 
 const Header = props => <header>header</header>;
 
@@ -33,14 +48,14 @@ class App extends Component {
 				<User id="111" name="username111" code="usercode111" />
 			</table>*/}
 			<div>{this.props.children}</div>
-			<Button>xx</Button>
+			{/*<Button>xx</Button>*/}
 			<Footer />
 		</div>;
 	}
 }
 
 // レンダリング
-render(<Router>
+render(<Router history={browserHistory}>
 		<Route path="/" component={App} />
 	</Router>,
 	document.getElementById('app'));
