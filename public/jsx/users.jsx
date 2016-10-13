@@ -1,7 +1,9 @@
 // <Users />
 
-import {Component} from 'react';
-import User from './user.jsx';
+//import {Component} from 'react';
+const Component = require('react').Component;
+//import User from './user.jsx';
+const User = require('./user.jsx');
 
 class Users extends Component {
 	constructor(props) {
@@ -11,8 +13,8 @@ class Users extends Component {
 		};
 	}
 	componentDidMount() {
-		setTimeout(()=>{
-			request.get({headers: {'x-get-data': true}}, location.href + 'users')
+		setTimeout(() => {
+			request.get({headers: {'x-get-data': true}}, '/users')
 			.then(res => this.setState({users: res.body}));
 		}, 3000);
 	}
@@ -20,6 +22,7 @@ class Users extends Component {
 		//console.log('this.state.users:', this.state.users);
 		//console.log('typeof this.state.users:', typeof this.state.users);
 		//console.log('this.state.users.constructor.name:', this.state.users.constructor.name);
+		//console.log(this.state.users);
 		const users = this.state.users.map(user =>
 			<User {...user} key={user.id}/>);
 		return <div>
@@ -40,4 +43,5 @@ class Users extends Component {
 	}
 }
 
-export default Users;
+//export default Users;
+module.exports = Users;
