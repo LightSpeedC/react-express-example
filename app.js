@@ -14,6 +14,8 @@ const http = require('http');
 
 const app = express();
 
+console.log('app starting...');
+
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -145,6 +147,7 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 function onListening() {
+	console.log('app listening...');
 	debug('Listening on port ' + server.address().port);
 }
 
