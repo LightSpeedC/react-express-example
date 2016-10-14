@@ -26,6 +26,7 @@
     "gulp-plumber": "^1.1.0",
     "gulp-uglify": "^2.0.0",
     "literalify": "^0.4.0",
+    "material-ui": "^0.16.0",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.3.2",
     "react-dom": "^15.3.2",

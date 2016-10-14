@@ -11,7 +11,7 @@ const literalify = require('literalify');
 // トランスパイル
 // browserify
 gulp.task('browserify', () =>
-	browserify('./public/jsx/app.jsx', {debug: true})
+	browserify('./src/jsx/app.jsx', {debug: true})
 		//.transform(reactify)
 		.transform(babelify, {presets: ['es2015', 'react']})
 		//.transform(babelify, {presets: ['react']})
@@ -47,7 +47,7 @@ gulp.task('copy-min-js', () =>
 
 // watch 
 gulp.task('watch', () =>
-	gulp.watch('./public/jsx/*.jsx', ['browserify']));
+	gulp.watch('./src/jsx/*.jsx', ['browserify']));
 
 // default
 gulp.task('default', ['copy-min-js', 'browserify', 'watch'], () =>

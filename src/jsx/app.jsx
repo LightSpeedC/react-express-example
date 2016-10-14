@@ -10,6 +10,9 @@ const Router = require('react-router').Router;
 const Route = require('react-router').Route;
 const browserHistory = require('react-router').browserHistory;
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+//const MuiThemeProvider = require('material-ui/styles/MuiThemeProvider');
+
 /*
 //import {Button, Alert, Spinner} from 'elemental';
 const Alert = require('elemental').Alert;
@@ -34,23 +37,28 @@ const Main = props => <main>main</main>;
 
 const Footer = props => <footer>footer</footer>;
 
+//const App = () => (
+//	<MuiThemeProvider>
+//		<MyAwesomeReactComponent />
+//	</MuiThemeProvider>
+//);
+
 // コンポーネント
 class App extends Component {
 	render() {
-		return <div>
+		return <MuiThemeProvider>
+			<div>
 			<Header />
 			<h1 key="h1">React.jsのテスト</h1>
 			<HelloMessage key="hm" name="React!" />
 			<SocketNews key="sn" socket={socket} />
 			<Timer />
 			<Users />
-			{/*<table>
-				<User id="111" name="username111" code="usercode111" />
-			</table>*/}
 			<div>{this.props.children}</div>
 			{/*<Button>xx</Button>*/}
 			<Footer />
-		</div>;
+			</div>
+		</MuiThemeProvider>;
 	}
 }
 
