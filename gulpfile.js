@@ -1,6 +1,3 @@
-// start main app
-setTimeout(require, 3000, './app');
-
 // gulpfile.js
 const gulp       = require('gulp');
 const plumber    = require('gulp-plumber');
@@ -53,4 +50,6 @@ gulp.task('watch', () =>
 	gulp.watch('./public/jsx/*.jsx', ['browserify']));
 
 // default
-gulp.task('default', ['copy-min-js', 'browserify', 'watch']);
+gulp.task('default', ['copy-min-js', 'browserify', 'watch'], () =>
+	// start main app
+	setTimeout(require, 10, './app'));
