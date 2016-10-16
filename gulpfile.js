@@ -18,11 +18,11 @@ gulp.task('browserify', () =>
 		//.transform(babelify.configure({
 		//	presets: ['es2015', 'react']
 		//}))
-		.transform(literalify.configure({
-			'react': 'window.React',
-			'react-dom': 'window.ReactDOM',
-			'react-router': 'window.ReactRouter'
-		}))
+		//.transform(literalify.configure({
+		//	'react': 'window.React',
+		//	'react-dom': 'window.ReactDOM',
+		//	'react-router': 'window.ReactRouter'
+		//}))
 		.bundle()
 		.pipe(plumber())
 		//.on('error', function (err) { console.log('Error : ' + err.message); })
@@ -50,6 +50,6 @@ gulp.task('watch', () =>
 	gulp.watch('./src/jsx/*.jsx', ['browserify']));
 
 // default
-gulp.task('default', ['copy-min-js', 'browserify', 'watch'], () =>
+gulp.task('default', ['browserify', 'watch'], () =>
 	// start main app
 	setTimeout(require, 10, './app'));

@@ -1,14 +1,20 @@
 // <App />
 
 // Reactをインポート
-//import {Component} from 'react';
-const Component = require('react').Component;
-//import {render} from 'react-dom';
-const render = require('react-dom').render;
-//import {Router, Route} from 'react-router';
-const Router = require('react-router').Router;
-const Route = require('react-router').Route;
-const browserHistory = require('react-router').browserHistory;
+import React, {Component} from 'react';
+//const Component = require('react').Component;
+import {render} from 'react-dom';
+//const render = require('react-dom').render;
+import {Router, Route, browserHistory} from 'react-router';
+//const Router = require('react-router').Router;
+//const Route = require('react-router').Route;
+//const browserHistory = require('react-router').browserHistory;
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 //const MuiThemeProvider = require('material-ui/styles/MuiThemeProvider');
@@ -37,36 +43,44 @@ const Main = props => <main>main</main>;
 
 const Footer = props => <footer>footer</footer>;
 
-//const App = () => (
-//	<MuiThemeProvider>
-//		<MyAwesomeReactComponent />
-//	</MuiThemeProvider>
-//);
+//import RaisedButton from 'material-ui/RaisedButton';
+//import {RaisedButton} from 'material-ui';
+//			<RaisedButton label="Default" />
+//import AppBar from 'material-ui/AppBar';
+//			<AppBar title="Title"
+//				iconClassNameRight="muidocs-icon-navigation-expand-more"
+//			/>
 
+// コンポーネント
+class App extends Component {
+	render() {
+		return <Users />;
+	}
+};
+
+/*
 // コンポーネント
 class App extends Component {
 	render() {
 		return <MuiThemeProvider>
 			<div>
-			<Header />
 			<h1 key="h1">React.jsのテスト</h1>
 			<HelloMessage key="hm" name="React!" />
 			<SocketNews key="sn" socket={socket} />
 			<Timer />
 			<Users />
-			<div>{this.props.children}</div>
-			{/*<Button>xx</Button>*/}
-			<Footer />
 			</div>
-		</MuiThemeProvider>;
-	}
-}
+		</MuiThemeProvider>}};
+*/
+
 
 // レンダリング
-render(<Router history={browserHistory}>
-		<Route path="/" component={App} />
-	</Router>,
-	document.getElementById('app'));
+render(<App />, document.getElementById('app'));
+
+//render(<Router history={browserHistory}>
+//		<Route path="/" component={App} />
+//	</Router>,
+//	document.getElementById('app'));
 
 // 参考URL
 // https://www.willstyle.co.jp/blog/268/ - [入門] React.jsさわってみた。

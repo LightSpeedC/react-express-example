@@ -1,7 +1,7 @@
 // <Users />
 
-//import {Component} from 'react';
-const Component = require('react').Component;
+import React, {Component} from 'react';
+//const Component = require('react').Component;
 //import User from './user.jsx';
 const User = require('./user.jsx');
 
@@ -43,5 +43,5 @@ class Users extends Component {
 	}
 }
 
-//export default Users;
-module.exports = Users;
+export default Users;
+//module.exports = Users;

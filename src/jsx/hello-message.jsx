@@ -1,7 +1,7 @@
 // <HelloMessage name={name}/>
 
-//import {Component} from 'react';
-const Component = require('react').Component;
+import React, {Component} from 'react';
+//const Component = require('react').Component;
 
 class HelloMessage extends Component {
 	constructor(props) {
@@ -13,5 +13,5 @@ class HelloMessage extends Component {
 	}
 }
 
-//export default HelloMessage;
-module.exports = HelloMessage;
+export default HelloMessage;
+//module.exports = HelloMessage;

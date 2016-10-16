@@ -1,7 +1,7 @@
 // <Timer interval={1000} />
 
-//import {Component} from 'react';
-const Component = require('react').Component;
+import React, {Component} from 'react';
+//const Component = require('react').Component;
 
 class Timer extends Component {
 	constructor(props) {
@@ -24,5 +24,5 @@ class Timer extends Component {
 	}
 }
 
-//export default Timer;
-module.exports = Timer;
+export default Timer;
+//module.exports = Timer;

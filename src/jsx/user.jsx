@@ -5,5 +5,5 @@ const User = props => <tr><td>{props.id}</td><td>{props.code}</td><td>{props.nam
 User.defaultProps = {id:0, code:'', name:''};
 //User.propTypes = {};
 
-//export default User;
-module.exports = User;
+export default User;
+//module.exports = User;
